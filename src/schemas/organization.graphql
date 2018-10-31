@@ -1,0 +1,5 @@
+type organization {
+	name: String
+	createdAt: Int
+	updatedAt: Int
+}

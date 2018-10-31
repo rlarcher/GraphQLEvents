@@ -1,0 +1,8 @@
+type event {
+	name: String
+	organization: String
+	date: String
+	description: String
+	createdAt: Int
+	updatedAt: Int
+}

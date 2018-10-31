@@ -1,0 +1,10 @@
+# import * from "event.graphql"
+# import * from "location.graphql"
+# import * from "organization.graphql"
+
+type query {
+	eventsByOrganization(name: String) : [event]
+	locationsByOrganization(name: String) : [location]
+	organizationByLocation(latitude: String, longitude: String) : organization
+	organizationByEvent(event: name) : organization
+}

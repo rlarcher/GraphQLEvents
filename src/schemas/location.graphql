@@ -1,0 +1,9 @@
+type location {
+	name: String
+	organization: String
+	address: String
+	latitude:String
+	longitude: String
+	createdAt: Int
+	updatedAt: Int
+}
