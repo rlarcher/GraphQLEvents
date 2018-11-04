@@ -1,4 +1,4 @@
-type event {
+type Event {
 	name: String
 	organization: String
 	date: String

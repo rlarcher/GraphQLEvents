@@ -1,4 +1,4 @@
-type location {
+type Location {
 	name: String
 	organization: String
 	address: String

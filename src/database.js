@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-export const eventSchema = new Schema({
+const eventSchema = new Schema({
     name: { type: String, required: true, max: 100 },
 	date: { type: String, required: true },
 	description: { type: String, required: true },
@@ -9,9 +9,9 @@ export const eventSchema = new Schema({
 	updatedAt: { type: Number, required: true }
 });
 
-export const eventModel = mongoose.Model('Event', eventSchema);
+const eventModel = mongoose.model('Event', eventSchema);
 
-export const locationSchema = new Schema({
+const locationSchema = new Schema({
     name: { type: String, required: true, max: 100 },
 	address: { type: String, required: true },
 	latitude: { type: String, required: true },
@@ -20,19 +20,35 @@ export const locationSchema = new Schema({
 	updatedAt: { type: Number, required: true }
 });
 
-export const locationModel = mongoose.Model('Location', locationSchema);
+const locationModel = mongoose.model('Location', locationSchema);
 
-export const organizationSchema = new Schema({
+const organizationSchema = new Schema({
     name: { type: String, required: true, max: 100 },
 	createdAt: { type: Number, required: true },
 	updatedAt: { type: Number, required: true }
 });
 
-export const organizationModel = mongoose.Model('Organization', organizationSchema);
+const organizationModel = mongoose.model('Organization', organizationSchema);
 
-const mongoDB = 'mongodb://127.0.0.1/my_database';
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
+function getDatabaseConnection() {
+	// TODO: make these params and store in ENV vars
+	const username = 'econify';
+	const password = 'econify';
+	mongoose.connect(`mongodb://ds145871.mlab.com:45871/${encodeURIComponent(username)}:${encodeURIComponent(password)}`,
+		{ useNewUrlParser: true });
+	mongoose.Promise = global.Promise;
+	const db = mongoose.connection;
 
-db.on('error', () => console.log('MongoDB connection error:'));
+	db.on('error', (err) => console.log('MongoDB connection error:', err));
+	return db;
+}
+
+module.exports = {
+	eventModel,
+	eventSchema,
+	getDatabaseConnection,
+	locationModel,
+	locationSchema,
+	organizationModel,
+	organizationSchema,
+}

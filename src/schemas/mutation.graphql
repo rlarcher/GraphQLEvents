@@ -1,9 +1,0 @@
-# import * from "event.graphql"
-# import * from "location.graphql"
-# import * from "organization.graphql"
-
-type mutation {
-	addEvent(name: String, organiztion: String, date: String, description: String) : event
-	addLocation(name: String, organiztion: String, address: String, latitude: String, longitude: String) : location
-	addOrganization(name: String) : organization
-}

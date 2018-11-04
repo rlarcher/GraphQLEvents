@@ -1,4 +1,4 @@
-type organization {
+type Organization {
 	name: String
 	createdAt: Int
 	updatedAt: Int

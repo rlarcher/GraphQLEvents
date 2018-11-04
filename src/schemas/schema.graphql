@@ -1,0 +1,16 @@
+# import * from "event.graphql"
+# import * from "location.graphql"
+# import * from "organization.graphql"
+
+type Query {
+	eventsByOrganization(name: String) : [Event]
+	locationsByOrganization(name: String) : [Location]
+	organizationByLocation(latitude: String, longitude: String) : Organization
+	organizationByEvent(event: String) : Organization
+}
+
+type Mutation {
+	addEvent(name: String, organization: String, date: String, description: String) : Event
+	addLocation(name: String, organization: String, address: String, latitude: String, longitude: String) : Location
+	addOrganization(name: String) : Organization
+}

@@ -1,9 +1,9 @@
 const { eventModel, locationModel, organizationModel } = require('../database');
 
-export const query = {
+const Query = {
 	eventsByOrganization: async(parent, { organization }, context) => {
 		const event = await eventModel.find({
-			organization: 
+			organization: organization,
 		});
 		return event;
 	},
@@ -27,3 +27,7 @@ export const query = {
 		return organization;
 	},
 };
+
+module.exports = {
+	Query,
+}
