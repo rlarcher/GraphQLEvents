@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-    name: { type: String, required: true, max: 100 },
+	name: { type: String, required: true, max: 100 },
+	organization: { type: String, required: true, max: 100 },
 	date: { type: String, required: true },
 	description: { type: String, required: true },
 	createdAt: { type: Number, required: true },
@@ -12,7 +13,8 @@ const eventSchema = new Schema({
 const eventModel = mongoose.model('Event', eventSchema);
 
 const locationSchema = new Schema({
-    name: { type: String, required: true, max: 100 },
+	name: { type: String, required: true, max: 100 },
+	organization: { type: String, required: true, max: 100 },
 	address: { type: String, required: true },
 	latitude: { type: String, required: true },
 	longitude: { type: String, required: true },
@@ -34,8 +36,14 @@ function getDatabaseConnection() {
 	// TODO: make these params and store in ENV vars
 	const username = 'econify';
 	const password = 'econify';
-	mongoose.connect(`mongodb://ds145871.mlab.com:45871/${encodeURIComponent(username)}:${encodeURIComponent(password)}`,
-		{ useNewUrlParser: true });
+	const mongodbUri = `mongodb://@ds145871.mlab.com:45871/econify`;
+	mongoose.connect(mongodbUri, {
+		useNewUrlParser: true,
+		auth: {
+			user: 'econify',
+			password: 'econify123',
+		}
+	})
 	mongoose.Promise = global.Promise;
 	const db = mongoose.connection;
 

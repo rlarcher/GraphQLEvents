@@ -1,9 +1,9 @@
 const { eventModel, locationModel, organizationModel } = require('../database');
 
 const Query = {
-	eventsByOrganization: async(parent, { organization }, context) => {
+	eventsByOrganization: async(parent, { name }, context) => {
 		const event = await eventModel.find({
-			organization: organization,
+			organization: name,
 		});
 		return event;
 	},
@@ -14,17 +14,24 @@ const Query = {
 		return locations;
 	},
 	organizationByLocation: async(parent, { latitude, longitude }, context) => {
-		const organization = await organizationModel.find({
+		const location = await organizationModel.find({
 			latitude,
 			longitude,
 		});
-		return organization;
-	},
-	organizationByEvent: async(parent, { name }, context) => {
-		const organization = await organizationModel.find({
-			event: name,
+		const organization = location.organization;
+		return await organizationModel.findOne({
+			name: organization,
 		});
-		return organization;
+	},
+	organizationByEvent: async(parent, { event }, context) => {
+		const eventObj = await eventModel.findOne({
+			name: event,
+		});
+		const organization = eventObj.organization;
+		const organizationObj = await organizationModel.findOne({
+			name: organization,
+		});
+		return organizationObj;
 	},
 };
 

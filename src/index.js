@@ -15,7 +15,7 @@ const schema = makeExecutableSchema({
 
 app.use(bodyParser.json());
 
-app.use('/graphql', graphqlExpress(async (request) => console.log(request) || ({
+app.use('/graphql', graphqlExpress(async (request) => ({
 	schema: schema,
 	context: {
 		db: getDatabaseConnection(),
